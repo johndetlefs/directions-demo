@@ -64,4 +64,4 @@ typings/
 .vscode
 
 # firebase credentials
-firebase/credentials
+src/firebase/credentials/
