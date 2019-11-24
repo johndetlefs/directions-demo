@@ -3,6 +3,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import { logoutUser } from "../src/actions";
 
 const useStyles = makeStyles(theme => ({
   navbar: {
@@ -13,20 +15,37 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Nav = () => {
+const Nav = ({ isLoggingOut, isAuthenticated, dispatch }) => {
   const classes = useStyles();
   return (
     <div className={classes.navbar}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            News
+            Demo Directions App
           </Typography>
-          <Button color="inherit">Login</Button>
+          {isAuthenticated ? (
+            <Button
+              color="inherit"
+              onClick={() => {
+                dispatch(logoutUser());
+              }}
+            >
+              {isLoggingOut ? "Logging out..." : "Logout"}
+            </Button>
+          ) : null}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-export default Nav;
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    isLoggingOut: state.auth.isLoggingOut,
+    logoutError: state.auth.logoutError
+  };
+}
+
+export default connect(mapStateToProps)(Nav);

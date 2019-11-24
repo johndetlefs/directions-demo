@@ -8,8 +8,13 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { blue } from "@material-ui/core/colors";
 import AddIcon from "@material-ui/icons/Add";
+import { ENTERED } from "react-transition-group/Transition";
+
+// This component displays the Material UI FAB button, which when clicked reveals a modal where
+// the desired destination can be entered.
+//
+// The input uses the Google Places Autocomplete API to find possible destinations.
 
 const useStyles = makeStyles(theme => ({
   fab: {

@@ -1,9 +1,10 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 // import "firebase/firestore";
-import clientCredentials from "./client";
+import clientCredentials from "./credentials/client";
 
-export const myFirebase = firebase.initializeApp(clientCredentials);
-// const baseDb = myFirebase.firestore();
-// export const db = baseDb;
-// this is some important information
+if (!firebase.apps.length) {
+  firebase.initializeApp(clientCredentials);
+}
+
+export const myFirebase = firebase.auth();

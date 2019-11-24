@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Destination from "../components/destination";
-import Nav from "../components/navbar";
+import Router from "next/router";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles(theme => ({
     height: "calc(100vh - 64px)"
   }
 }));
+
 const googleMapObject = {
   loadMapApi: null,
   map: null,
@@ -79,7 +81,8 @@ const googleMapObject = {
     this.createMarker();
   }
 };
-const Maps = props => {
+
+const Maps = ({ isAuthenticated }) => {
   const googleMapRef = React.createRef();
   const classes = useStyles();
   const map = googleMapObject;
@@ -93,18 +96,27 @@ const Maps = props => {
     document.head.appendChild(style);
   };
   useEffect(() => {
-    if (map.map == null) {
-      map.initiateMap(googleMapRef);
-      addAutoCompleteCss();
+    if (!isAuthenticated) {
+      Router.push("/login");
     }
+    map.initiateMap(googleMapRef);
+    addAutoCompleteCss();
   });
   return (
     <>
       <div className={classes.wrapper}>
         <Destination map={map} />
-        <div className={classes.map} id="google-map" ref={googleMapRef} />
+        <div className={classes.map} id="google-map" ref={googleMapRef}>
+          Loading
+        </div>
       </div>
     </>
   );
 };
-export default Maps;
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps)(Maps);

@@ -63,7 +63,6 @@ const verifySuccess = () => {
 export const loginUser = (email, password) => dispatch => {
   dispatch(requestLogin());
   myFirebase
-    .auth()
     .signInWithEmailAndPassword(email, password)
     .then(user => {
       dispatch(receiveLogin(user));
@@ -77,9 +76,12 @@ export const loginUser = (email, password) => dispatch => {
 export const logoutUser = () => dispatch => {
   dispatch(requestLogout());
   myFirebase
-    .auth()
     .signOut()
     .then(() => {
+      fetch("/api/logout", {
+        method: "POST",
+        credentials: "same-origin"
+      });
       dispatch(receiveLogout());
     })
     .catch(error => {
@@ -90,8 +92,18 @@ export const logoutUser = () => dispatch => {
 
 export const verifyAuth = () => dispatch => {
   dispatch(verifyRequest());
-  myFirebase.auth().onAuthStateChanged(user => {
+  myFirebase.onAuthStateChanged(user => {
     if (user !== null) {
+      user.getIdToken().then(token => {
+        // eslint-disable-next-line no-undef
+        return fetch("/api/login", {
+          method: "POST",
+          // eslint-disable-next-line no-undef
+          headers: new Headers({ "Content-Type": "application/json" }),
+          credentials: "same-origin",
+          body: JSON.stringify({ token })
+        });
+      });
       dispatch(receiveLogin(user));
     }
     dispatch(verifySuccess());

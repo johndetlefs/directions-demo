@@ -9,17 +9,23 @@
     "clsx": "latest",
     "firebase": "^7.4.0",
     "firebase-admin": "^8.8.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "jwt-simple": "^0.5.6",
     "next": "latest",
+    "next-connect": "^0.5.1",
+    "next-session": "^2.1.1",
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-redux": "^7.1.3",
     "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "dev": "next -p 3001",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 3001"
   }
 }

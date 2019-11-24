@@ -3,7 +3,9 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 
-export function Copyright() {
+// Component for displaying basic copyright information
+
+const Copyright = () => {
   return (
     <Box mt={8}>
       <Typography variant="body2" color="textSecondary" align="center">
@@ -16,4 +18,6 @@ export function Copyright() {
       </Typography>
     </Box>
   );
-}
+};
+
+export default Copyright;
