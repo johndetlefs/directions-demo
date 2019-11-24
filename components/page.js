@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Head from "next/head";
 import Nav from "./navbar";
 
+// This component provides a basic wrapper for all pages, and passes props down the content component.
 class Page extends Component {
   render() {
     return (

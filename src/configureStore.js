@@ -6,6 +6,8 @@ import rootReducer from "./reducers";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+// Redux setup, including Redux, Thunk, & Persist
+
 const initialState = {};
 
 const persistConfig = {
@@ -22,6 +24,7 @@ export function initializeStore(persistedState = initialState) {
     persistedState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
   );
+  // First thing we do is to check if logged in
   store.dispatch(verifyAuth());
   return store;
 }

@@ -4,6 +4,10 @@ import Destination from "../components/destination";
 import Router from "next/router";
 import { connect } from "react-redux";
 
+// This page displays the Google Map component.
+//
+// TODO: Move GoogleMapObject to its own component
+
 const useStyles = makeStyles(theme => ({
   wrapper: {
     flexGrow: 1,
@@ -22,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 const googleMapObject = {
   loadMapApi: null,
   map: null,
+  // default latlng is set for Sydney CBD
   pos: {
     lat: -33.865143,
     lng: 151.2099
@@ -99,6 +104,7 @@ const Maps = ({ isAuthenticated }) => {
     if (!isAuthenticated) {
       Router.push("/login");
     }
+    // Add some CSS to bring the autocomplete list over the modal
     map.initiateMap(googleMapRef);
     addAutoCompleteCss();
   });

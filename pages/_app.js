@@ -10,6 +10,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import Page from "../components/page";
 
+// Custom App file - for use with Next.JS
+
 function MyApp({ Component, reduxStore, pageProps }) {
   const persistor = persistStore(reduxStore);
 

@@ -1,3 +1,5 @@
+// Server side Firebase credentials
+
 module.exports = {
   type: "service_account",
   project_id: "hba-demo-maps-25950",

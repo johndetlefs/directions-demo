@@ -11,6 +11,8 @@ export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 export const VERIFY_REQUEST = "VERIFY_REQUEST";
 export const VERIFY_SUCCESS = "VERIFY_SUCCESS";
 
+// Auth actions for use with Redux
+
 const requestLogin = () => {
   return {
     type: LOGIN_REQUEST
@@ -68,7 +70,6 @@ export const loginUser = (email, password) => dispatch => {
       dispatch(receiveLogin(user));
     })
     .catch(error => {
-      //Do something with the error if you want!
       dispatch(loginError());
     });
 };
@@ -85,7 +86,6 @@ export const logoutUser = () => dispatch => {
       dispatch(receiveLogout());
     })
     .catch(error => {
-      //Do something with the error if you want!
       dispatch(logoutError());
     });
 };
@@ -95,10 +95,9 @@ export const verifyAuth = () => dispatch => {
   myFirebase.onAuthStateChanged(user => {
     if (user !== null) {
       user.getIdToken().then(token => {
-        // eslint-disable-next-line no-undef
+        // send the ID toekn through to the server
         return fetch("/api/login", {
           method: "POST",
-          // eslint-disable-next-line no-undef
           headers: new Headers({ "Content-Type": "application/json" }),
           credentials: "same-origin",
           body: JSON.stringify({ token })

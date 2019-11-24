@@ -6,6 +6,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { logoutUser } from "../src/actions";
 
+// Navbar component using Material UI AppBar component.
+//
+// The main use here is for the logout button.
+
 const useStyles = makeStyles(theme => ({
   navbar: {
     gridArea: "navbar"

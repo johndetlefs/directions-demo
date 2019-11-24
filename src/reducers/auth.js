@@ -1,3 +1,5 @@
+// Auth reducers (for use with Redux)
+
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,

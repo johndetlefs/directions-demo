@@ -1,9 +1,14 @@
 import { useSession } from "next-session";
 const admin = require("firebase-admin");
 
+// Admin-Only demo page, will return 200 for a logged in admin user, and 401 for anyone else
+
+// TODO Move firebase admin initialization into separate module
+
 const handler = async (req, res) => {
   const session = await useSession(req, res);
 
+  // Is there a logged in user? If so, continue.
   if (!session.token) {
     res.status(401).end();
   } else {

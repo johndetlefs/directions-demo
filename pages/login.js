@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = ({ isAuthenticated, loginError, dispatch }) => {
+  // Check if already authenticated, and if so, redirect through to main app page
   useEffect(() => {
     if (isAuthenticated) {
       Router.push("/");

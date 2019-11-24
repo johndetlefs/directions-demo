@@ -1,3 +1,5 @@
+// Client side Firebase credentials
+
 module.exports = {
   apiKey: "AIzaSyDPhfp1uLke1TABtlzXglXT5-RLVjY3E-4",
   authDomain: "hba-demo-maps-25950.firebaseapp.com",
