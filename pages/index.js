@@ -70,7 +70,7 @@ const googleMapObject = {
       lng: this.pos.lng
     });
     this.map = new window.google.maps.Map(
-      document.querySelector("#google-map"),
+      document.getElementById("google-map"),
       {
         zoom: 15,
         center: latlng,
