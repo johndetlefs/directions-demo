@@ -10,8 +10,11 @@ const Copyright = () => {
     <Box mt={8}>
       <Typography variant="body2" color="textSecondary" align="center">
         {"Copyright © "}
-        <Link color="inherit" href="https://github.com/HBAGroup/Demo-App">
-          John Detlefs - Demo App
+        <Link
+          color="inherit"
+          href="https://github.com/johndetlefs/directions-demo/"
+        >
+          John Detlefs - Directions Demo App
         </Link>{" "}
         {new Date().getFullYear()}
         {"."}

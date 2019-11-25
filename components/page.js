@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Nav from "./navbar";
 
-// This component provides a basic wrapper for all pages, and passes props down the content component.
+// This component provides a basic wrapper for all pages, and passes props down the content component
 class Page extends Component {
   render() {
     return (
