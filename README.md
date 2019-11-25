@@ -46,4 +46,4 @@ Admin users will receive a status of 200 and non-admin (read-only) will receive 
 ## Not yet complete
 
 - Haven't implement unit testing
-- Google Maps error upon manual refresh, everything works as expected, but console is registering errors.
+- Need to figure out how to only add Google Maps Script once. Will look into using Redux to store map object

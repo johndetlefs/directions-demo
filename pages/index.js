@@ -26,14 +26,16 @@ const useStyles = makeStyles(theme => ({
 const googleMapObject = {
   loadMapApi: null,
   map: null,
+  mapRef: null,
   // default latlng is set for Sydney CBD
   pos: {
     lat: -33.865143,
     lng: 151.2099
   },
   marker: null,
-  initiateMap() {
+  initiateMap(mapRef) {
     var googleMap;
+    this.mapRef = mapRef.current;
     // load the map object
     if (this.map == null) {
       this.loadMap();
@@ -69,14 +71,11 @@ const googleMapObject = {
       lat: this.pos.lat,
       lng: this.pos.lng
     });
-    this.map = new window.google.maps.Map(
-      document.getElementById("google-map"),
-      {
-        zoom: 15,
-        center: latlng,
-        disableDefaultUI: true
-      }
-    );
+    this.map = new window.google.maps.Map(this.mapRef, {
+      zoom: 15,
+      center: latlng,
+      disableDefaultUI: true
+    });
   },
   getCurrentPosition() {
     if (navigator.geolocation) {
@@ -114,6 +113,7 @@ const googleMapObject = {
 
 const Maps = ({ isAuthenticated }) => {
   const classes = useStyles();
+  const mapRef = React.createRef();
   const map = googleMapObject;
   const addAutoCompleteCss = () => {
     var style = document.createElement("style");
@@ -129,14 +129,14 @@ const Maps = ({ isAuthenticated }) => {
       Router.push("/login");
     }
     // Add some CSS to bring the autocomplete list over the modal
-    map.initiateMap();
+    map.initiateMap(mapRef);
     addAutoCompleteCss();
   });
   return (
     <>
       <div className={classes.wrapper}>
         <Destination map={map} />
-        <div className={classes.map} id="google-map">
+        <div className={classes.map} id="google-map" ref={mapRef}>
           Loading
         </div>
       </div>
