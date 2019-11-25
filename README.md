@@ -42,3 +42,8 @@ To get directions to an address, click the blue "+" button on the bottom right, 
 There is only one place to go: `/api/admin_only`
 
 Admin users will receive a status of 200 and non-admin (read-only) will receive a status of 401
+
+## Not yet complete
+
+- Haven't implement unit testing
+- Google Maps error upon manual refresh, everything works as expected, but console is registering errors.
