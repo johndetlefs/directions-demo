@@ -1,33 +1,22 @@
-import { useSession } from "next-session";
-const admin = require("firebase-admin");
+var firebase = require("../../src/firebase/server");
+var Cookies = require("cookies");
 
 // Admin-Only demo page, will return 200 for a logged in admin user, and 401 for anyone else
-
 // TODO Move firebase admin initialization into separate module
 
-const handler = async (req, res) => {
-  const session = await useSession(req, res);
+var keys = ["john woz here"];
+
+const handler = (req, res) => {
+  var cookies = new Cookies(req, res, { keys: keys });
+
+  var session = JSON.parse(cookies.get("mapsSession", { signed: true }));
 
   // Is there a logged in user? If so, continue.
   if (!session.token) {
+    console.log("couldn't find a token!");
+    console.log(req.cookies);
     res.status(401).end();
   } else {
-    var firebase;
-
-    if (admin.apps[0].name == "server") {
-      firebase = admin.apps[0].auth();
-    } else {
-      admin.initializeApp(
-        {
-          credential: admin.credential.cert(
-            require("../../src/firebase/credentials/server")
-          )
-        },
-        "server"
-      );
-      firebase = admin.auth();
-    }
-
     firebase.verifyIdToken(session.token).then(claims => {
       if (claims.admin === true) {
         res.status(200).end();

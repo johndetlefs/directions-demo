@@ -2,7 +2,7 @@
 
 Directions Demo is a small demo application using Node.js, React, NextJS, Material UI, Google Maps API, Redux, Thunk, & Persist
 
-The live demo of the application can be accessed here: {insert live url}
+The live demo of the application can be accessed here: https://nextjs-wheat-gamma.now.sh
 
 ## Installation
 

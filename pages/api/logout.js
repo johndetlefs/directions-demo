@@ -1,8 +1,10 @@
-import { useSession } from "next-session";
+var Cookies = require("cookies");
 
-const handler = async (req, res) => {
-  await useSession(req, res);
-  req.session.destroy();
+var keys = ["john woz here"];
+
+const handler = (req, res) => {
+  var cookies = new Cookies(req, res, { keys: keys });
+  cookies.set("mapsSession", null, { signed: true });
   console.log("session destroyed");
   res.status(200).end();
 };
