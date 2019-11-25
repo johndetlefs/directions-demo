@@ -53,9 +53,10 @@ const googleMapObject = {
     window.document.body.appendChild(this.loadMapApi);
   },
   createGoogleMap(googleMapRef) {
+    const latlng = new window.google.maps.LatLng(this.pos.lat, this.pos.lng);
     this.map = new window.google.maps.Map(googleMapRef.current, {
       zoom: 15,
-      center: this.pos,
+      center: latlng,
       disableDefaultUI: true
     });
   },
