@@ -6,13 +6,18 @@ The live demo of the application can be accessed here: https://nextjs-wheat-gamm
 
 ## Installation
 
-To install this application, clone the github to a folder on your computer, and run:
+To install this application, clone the github to a folder on your computer
 
 ```javascript
+git clone https://github.com/johndetlefs/directions-demo.git
+```
+
+```javascript
+cd directions-demo
 npm install && npm run dev
 ```
 
-and that's it!
+and that's it! You can access the app at http://localhost:3001
 
 ## Using the application
 
