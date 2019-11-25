@@ -45,5 +45,6 @@ Admin users will receive a status of 200 and non-admin (read-only) will receive 
 
 ## Not yet complete
 
-- Haven't implement unit testing
-- Need to figure out how to only add Google Maps Script once.
+- Haven't implemented unit testing
+- Move Google Maps into its own component or class
+- Need to figure out how to only add Google Maps Script once. (will probably use loadjs)
