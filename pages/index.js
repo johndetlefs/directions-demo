@@ -32,33 +32,51 @@ const googleMapObject = {
     lng: 151.2099
   },
   marker: null,
-  initiateMap(googleMapRef) {
+  initiateMap() {
+    var googleMap;
     // load the map object
-    this.loadMap();
-    // check if the map object has loaded then render the map
-    this.loadMapApi.addEventListener("load", () => {
-      var googleMap = new Promise((resolve, reject) => {
-        this.createGoogleMap(googleMapRef);
+    if (this.map == null) {
+      this.loadMap();
+      // check if the map object has loaded then render the map
+      this.loadMapApi.addEventListener("load", () => {
+        googleMap = new Promise((resolve, reject) => {
+          this.createGoogleMap();
+          resolve(true);
+        });
+        googleMap.then(() => {
+          // if possible, grab the current position, recentre map, and add marker
+          this.getCurrentPosition();
+        });
+      });
+    } else {
+      googleMap = new Promise((resolve, reject) => {
+        this.createGoogleMap();
         resolve(true);
       });
       googleMap.then(() => {
         // if possible, grab the current position, recentre map, and add marker
         this.getCurrentPosition();
       });
-    });
+    }
   },
   loadMap() {
     this.loadMapApi = document.createElement("script");
     this.loadMapApi.src = `https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAyyadYv-nclpdXaBX6EzC7AHdJctr6ZNI`;
     window.document.body.appendChild(this.loadMapApi);
   },
-  createGoogleMap(googleMapRef) {
-    const latlng = new window.google.maps.LatLng(this.pos.lat, this.pos.lng);
-    this.map = new window.google.maps.Map(googleMapRef.current, {
-      zoom: 15,
-      center: latlng,
-      disableDefaultUI: true
+  createGoogleMap() {
+    const latlng = new window.google.maps.LatLng({
+      lat: this.pos.lat,
+      lng: this.pos.lng
     });
+    this.map = new window.google.maps.Map(
+      document.querySelector("#google-map"),
+      {
+        zoom: 15,
+        center: latlng,
+        disableDefaultUI: true
+      }
+    );
   },
   getCurrentPosition() {
     if (navigator.geolocation) {
@@ -73,7 +91,10 @@ const googleMapObject = {
   },
   createMarker() {
     this.marker = new window.google.maps.Marker({
-      position: this.pos,
+      position: new window.google.maps.LatLng({
+        lat: this.pos.lat,
+        lng: this.pos.lng
+      }),
       map: this.map
     });
   },
@@ -82,14 +103,16 @@ const googleMapObject = {
     this.marker = null;
   },
   centerMap() {
-    const center = new google.maps.LatLng(this.pos.lat, this.pos.lng);
+    const center = new google.maps.LatLng({
+      lat: this.pos.lat,
+      lng: this.pos.lng
+    });
     this.map.panTo(center);
     this.createMarker();
   }
 };
 
 const Maps = ({ isAuthenticated }) => {
-  const googleMapRef = React.createRef();
   const classes = useStyles();
   const map = googleMapObject;
   const addAutoCompleteCss = () => {
@@ -106,14 +129,14 @@ const Maps = ({ isAuthenticated }) => {
       Router.push("/login");
     }
     // Add some CSS to bring the autocomplete list over the modal
-    map.initiateMap(googleMapRef);
+    map.initiateMap();
     addAutoCompleteCss();
   });
   return (
     <>
       <div className={classes.wrapper}>
         <Destination map={map} />
-        <div className={classes.map} id="google-map" ref={googleMapRef}>
+        <div className={classes.map} id="google-map">
           Loading
         </div>
       </div>
