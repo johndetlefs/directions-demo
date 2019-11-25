@@ -12,6 +12,8 @@ To install this application, clone the github to a folder on your computer
 git clone https://github.com/johndetlefs/directions-demo.git
 ```
 
+then navigate into the folder, install npm modules, and run the dev environment
+
 ```javascript
 cd directions-demo
 npm install && npm run dev
@@ -31,9 +33,9 @@ User:
 un: johnpdetlefs+readonly@gmail.com
 pw: 9Password!
 
-Upon login you will be redirected to a simple map page that will attempt to use your current location. If you choose not to give access to your current location the application will use Sydney lat-lng instead.
+Upon login you will be redirected to a simple map page that will attempt to use your current location. If you choose not to give access to your current location the application will use the lat-lng for Sydney CBD instead.
 
-To get direction, click the "+" button on the bottom right, type out the full address, and click "let's go!"
+To get directions to an address, click the blue "+" button on the bottom right, type out the full address, and click "let's go!". You can do this as many times as you like.
 
 ## Using the api
 
